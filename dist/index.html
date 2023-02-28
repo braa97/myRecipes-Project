@@ -15,45 +15,26 @@
 <body>
 
     <div class="container">
-
         <div class="search-field-container">
             <input class="ingredient-input-field" type="text" id="ingredientInputField" placeholder="Ingredient">
             <button class="Ingredient-search-button">Search!</button>
         </div>
-
-        <div class="recipe-album-container">
-            <div class="recipe-container">
-                <div class="recipe-name"><a href="#">Crock Pot Chicken Baked Tacos</a></div>
-                <div class="recipe-image"><img src="./Beef-Tacos.jpg"/></div>
-                <div class="ingredient-list">
-                    ingredients
-                    <div class="ingredient-names">
-                        <ul>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                            <li>Chicken Breasts</li>
-                        </ul>
-                </div>
-                </div>
-                
-            </div>
-            
-            <div class="recipe-container"></div>
-            <div class="recipe-container"></div>
-        </div>
+        <div class="recipe-album-container"></div>
 
     </div>
 
-    <script id="ingredientContainerTemplate" type="text/x-handlebars-template"></script>
+    <script id="ingredientContainerTemplate" type="text/x-handlebars-template">
+        <div class="recipe-container">
+            <div class="recipe-name"><a href="#">Crock Pot Chicken Baked Tacos</a></div>
+            <div class="recipe-image"><img src="./Beef-Tacos.jpg"/></div>
+            <div class="ingredient-list">
+                <label class="ingredients-label">Ingredients</label>
+                <div class="ingredient-names">
+                    <!-- <ul></ul> -->
+            </div>
+            </div>
+        </div>
+    </script>
 
     <script src="main.js"></script>
 </body>
