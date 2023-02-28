@@ -4,9 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Mukta:wght@200&display=swap" rel="stylesheet">
+    <script src="/jquery.js"></script>
+    <script src="/handlebars.js"></script>
+    <title>Reccipes</title>
 </head>
 <body>
-    
+
+    <div class="container">
+
+        <div class="search-field-container">
+            <input class="ingredient-input-field" type="text" id="ingredientInputField" placeholder="Ingredient">
+            <button class="Ingredient-search-button">Search!</button>
+        </div>
+
+        <div class="recipe-album-container">
+            <div class="recipe-container">
+                <div class="recipe-name"><a href="#">Crock Pot Chicken Baked Tacos</a></div>
+                <div class="recipe-image"><img src="./Beef-Tacos.jpg"/></div>
+                <div class="ingredient-list">
+                    ingredients
+                    <div class="ingredient-names">
+                        <ul>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                            <li>Chicken Breasts</li>
+                        </ul>
+                </div>
+                </div>
+                
+            </div>
+            
+            <div class="recipe-container"></div>
+            <div class="recipe-container"></div>
+        </div>
+
+    </div>
+
+    <script id="ingredientContainerTemplate" type="text/x-handlebars-template"></script>
+
+    <script src="main.js"></script>
 </body>
 </html>
