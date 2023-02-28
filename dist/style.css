@@ -15,12 +15,12 @@ body {
     display: flex;
 }
 
-.ingredient-input-field {
+#ingredientInputField {
     width: 7%;
     margin: 1% 0 1% 0.5%;
 }
 
-.Ingredient-search-button {
+#Ingredient-search-button {
     margin: 0.9% 0.5%;
 }
 
