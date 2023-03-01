@@ -8,8 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Mukta:wght@200&display=swap" rel="stylesheet">
-    <script src="/jquery.js"></script>
-    <script src="/handlebars.js"></script>
+    <script src="/handlebars/dist/handlebars.js"></script>
+    <script src="/jquery/dist/jquery.js"></script>
     <title>Reccipes</title>
 </head>
 <body>
@@ -17,6 +17,12 @@
     <div class="container">
         <div class="search-field-container">
             <input type="text" id="ingredientInputField" placeholder="Ingredient">
+            <div class="filter-options">
+                <input class="form-radio" type="radio" name="gluten" id="gluten">
+                <label for="gluten">Gluten Free</label>
+                <input class="form-radio" type="radio" name="dairy" id="dairy">
+                <label for="dairy">Dairy Free</label>
+            </div>
             <button id="Ingredient-search-button" id="">Search!</button>
         </div>
         <div class="recipe-album-container"></div>
@@ -24,18 +30,24 @@
     </div>
 
     <script id="ingredientContainerTemplate" type="text/x-handlebars-template">
-        <div class="recipe-container">
-            <div class="recipe-name"><a href="#">Crock Pot Chicken Baked Tacos</a></div>
-            <div class="recipe-image"><img src="./Beef-Tacos.jpg"/></div>
+        {{#each this}}
+        <div class="recipe-container" data-id="{{this.id}}">
+            <div class="recipe-name"><a href="{{this.link}}">{{this.title}}</a></div>
+            <div class="recipe-image"><img src="{{this.image}}"/></div>
             <div class="ingredient-list">
                 <label class="ingredients-label">Ingredients</label>
                 <div class="ingredient-names">
-                    <ul></ul>
+                    <ul>
+                        {{#each this.ingredients}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
             </div>
             </div>
         </div>
+        {{/each}}
     </script>
-
+    <script src="Renderer.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
