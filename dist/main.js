@@ -1,9 +1,21 @@
-let renderer = new Renderer()
+const Source = $("#ingredientContainerTemplate").html()
+const template = Handlebars.compile(Source);
+const recipeElement = $(".recipe-album-container")
+
+const render = function(data) {
+    recipeElement.empty()
+    let newHTML = template(data);
+    recipeElement.append(newHTML)
+}
+
 $("#Ingredient-search-button").on("click", function() {
     let ingredient = $(this).siblings("#ingredientInputField").val()
+    let glutenCheck = $(this).closest(".search-field-container").find("#gluten:checked").length // 1 - checked 0 unchecked
+    let dairyCheck = $(this).closest(".search-field-container").find("#dairy:checked").length
 
-    $.get(`/recipe/${ingredient}`).then((data) => {
-        renderer.render(".recipe-album-container", "#ingredientContainerTemplate", data)
+    $.get(`/recipe/${ingredient}?gluten=${glutenCheck}&dairy=${dairyCheck}`)
+    .then((data) => {
+        render(data)
     })
 })
 
