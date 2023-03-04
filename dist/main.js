@@ -8,10 +8,10 @@ const render = function(data) {
     recipeElement.append(newHTML)
 }
 
-$("#Ingredient-search-button").on("click", function() {
+$("#ingredient-search-button").on("click", function() {
     let ingredient = $(this).siblings("#ingredientInputField").val()
-    let glutenCheck = $(this).closest(".search-field-container").find("#gluten:checked").length // 1 - checked 0 unchecked
-    let dairyCheck = $(this).closest(".search-field-container").find("#dairy:checked").length
+    let glutenCheck = $("#gluten:checked").length // 1 - checked 0 unchecked
+    let dairyCheck = $("#dairy:checked").length
 
     $.get(`/recipe/${ingredient}?gluten=${glutenCheck}&dairy=${dairyCheck}`)
     .then((data) => {
@@ -20,6 +20,6 @@ $("#Ingredient-search-button").on("click", function() {
 })
 
 $(".recipe-album-container").on("click", "img", function() {
-    let firstIngredient = $(this).closest(".recipe-container").find("ul").find("li:first").text()
+    let firstIngredient = $(this).closest(".recipe-container").find("li:first").text()
     alert(firstIngredient)
 })

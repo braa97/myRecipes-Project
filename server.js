@@ -15,10 +15,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
 
-
-app.get('/')
-
-
 const filterIngredients = function(ingredients, sensitivity) {
     let flag = 0
     ingredients.forEach((i) => {
@@ -74,7 +70,7 @@ app.get('/recipe/:ingredient', function(req, res) {
                 }
                 if (dairyCheck == 1 && glutenCheck == 1) {
                     allRecipes.forEach((element) => {
-                        if (filterIngredients(element.ingredients, dairyIngredients) && filterIngredients(element.ingredients, dairyIngredients)) {
+                        if (filterIngredients(element.ingredients, dairyIngredients) && filterIngredients(element.ingredients, glutenIngredients)) {
                             filteredRecipes.push(element)
                         }
                     })
