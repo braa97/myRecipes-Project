@@ -105,11 +105,11 @@ body {
     position: absolute;
     bottom: 0;
     justify-content: center;
-    
+    margin-left: 50%;
   }
   .pagination-number,
   .pagination-button{
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     background-color: transparent;
     border: none;
     margin: 0.25rem 0.25rem;

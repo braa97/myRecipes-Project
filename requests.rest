@@ -1,1 +1,1 @@
-GET http://localhost:3000/recipe/cheese
+GET http://localhost:3000/recipe/oil?page=2&limit=3

@@ -54,20 +54,6 @@ app.get('/recipe/:ingredient', function(req, res) {
     .then((recipes) => {     
         const results = {}
 
-        if (endIndex < recipes.data.results) {
-            results.next = {
-                page: page + 1,
-                limit: limit
-            }
-        }
-
-        if (startIndex > 0) {
-            results.previous = {
-                page: page - 1,
-                limit: limit
-            }
-        }
-
         results.results = recipes.data.results.slice(startIndex, endIndex)
         results.results.map((e) => {    
                 let recipe = {
@@ -81,6 +67,20 @@ app.get('/recipe/:ingredient', function(req, res) {
             })
             results.results = []
             results.results = allRecipes
+
+            if (endIndex < recipes.data.results.length) {
+                results.next = {
+                    page: JSON.parse(page) + 1,
+                    limit: limit
+                }
+            }
+    
+            if (startIndex > 0) {
+                results.previous = {
+                    page: page - 1,
+                    limit: limit
+                }
+            }
                 if (glutenCheck == 1 && dairyCheck == 0) {
                     allRecipes.forEach((element) => {
                         if (filterIngredients(element.ingredients, glutenIngredients)) {
