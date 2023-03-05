@@ -27,13 +27,21 @@
         </div>
         <div class="recipe-album-container"></div>
 
+        <nav class="pagination-container">
+            <button class="pagination-button" id="prev-button" title="Previous page" aria-label="Previous page">&lt;</button>
+            
+            <div id="pagination-numbers"></div>
+            
+            <button class="pagination-button" id="next-button" title="Next page" aria-label="Next page">&gt;</button>
+          </nav>
+
     </div>
 
     <script id="ingredientContainerTemplate" type="text/x-handlebars-template">
         {{#each this}}
-        <div class="recipe-container" data-id="{{this.id}}">
-            <div class="recipe-name"><a href="{{this.link}}">{{this.title}}</a></div>
-            <div class="recipe-image"><img src="{{this.image}}"/></div>
+        <div class="recipe-container" data-id="{{this.idMeal}}">
+            <div class="recipe-name"><a href="{{this.href}}">{{this.title}}</a></div>
+            <div class="recipe-image"><img src="{{this.thumbnail}}"/></div>
             <div class="ingredient-list">
                 <label class="ingredients-label">Ingredients</label>
                 <div class="ingredient-names">

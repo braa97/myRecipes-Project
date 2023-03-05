@@ -15,7 +15,8 @@ $("#ingredient-search-button").on("click", function() {
 
     $.get(`/recipe/${ingredient}?gluten=${glutenCheck}&dairy=${dairyCheck}`)
     .then((data) => {
-        render(data)
+        render(data.results)
+        console.log(data);
     })
 })
 

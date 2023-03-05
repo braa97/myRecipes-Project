@@ -36,49 +36,80 @@ app.get('/recipe/:ingredient', function(req, res) {
     let ingredient = req.params.ingredient
     let glutenCheck = req.query.gluten
     let dairyCheck = req.query.dairy
+    let page = req.query.page
+    let limit = req.query.limit
+    if (!page) {
+        page = 1
+    }
+    if (!limit) {
+        limit = 3
+    }
+    const startIndex = (page - 1) * limit
+    const endIndex = page * limit
+
     allRecipes = []
     filteredRecipes = []
+
     axios.get(`${INGREDIENT_URL}/${ingredient}`)
     .then((recipes) => {     
-            recipes.data.results.map((e) => {
+        const results = {}
+
+        if (endIndex < recipes.data.results) {
+            results.next = {
+                page: page + 1,
+                limit: limit
+            }
+        }
+
+        if (startIndex > 0) {
+            results.previous = {
+                page: page - 1,
+                limit: limit
+            }
+        }
+
+        results.results = recipes.data.results.slice(startIndex, endIndex)
+        results.results.map((e) => {    
                 let recipe = {
-                    id: e.idMeal,
+                    idMeal: e.idMeal,
                     title: e.title,
-                    image: e.thumbnail,
-                    link: e.href,
+                    thumbnail: e.thumbnail,
+                    href: e.href,
                     ingredients: e.ingredients
                 }
                 allRecipes.push(recipe)
             })
+            results.results = []
+            results.results = allRecipes
                 if (glutenCheck == 1 && dairyCheck == 0) {
                     allRecipes.forEach((element) => {
                         if (filterIngredients(element.ingredients, glutenIngredients)) {
-                            filteredRecipes.push(element)
+                            results.results.push(element)
                         }
                     })
-                    res.send(filteredRecipes)
+                    res.send(results)
                     return
                 }
                 if (dairyCheck == 1 && glutenCheck == 0) {
                     allRecipes.forEach((element) => {
                         if (filterIngredients(element.ingredients, dairyIngredients)) {
-                            filteredRecipes.push(element)
+                            results.results.push(element)
                         }
                     })
-                    res.send(filteredRecipes)
+                    res.send(results)
                     return
                 }
                 if (dairyCheck == 1 && glutenCheck == 1) {
                     allRecipes.forEach((element) => {
                         if (filterIngredients(element.ingredients, dairyIngredients) && filterIngredients(element.ingredients, glutenIngredients)) {
-                            filteredRecipes.push(element)
+                            results.results.push(element)
                         }
                     })
-                    res.send(filteredRecipes)
+                    res.send(results)
                     return
                 }
                 else {
-                    res.send(allRecipes)
+                    res.send(results)
                     return
                 }
     })
