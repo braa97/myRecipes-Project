@@ -7,18 +7,22 @@ const render = function(data) {
     let newHTML = template(data);
     recipeElement.append(newHTML)
 }
-let page = 1
+let currentPage
 let limit = 3
+let size
 
 $("#ingredient-search-button").on("click", function() {
     let ingredient = $(this).siblings("#ingredientInputField").val()
     let glutenCheck = $("#gluten:checked").length // 1 - checked 0 unchecked
     let dairyCheck = $("#dairy:checked").length
 
-    $.get(`/recipe/${ingredient}?gluten=${glutenCheck}&dairy=${dairyCheck}&page=${page}&limit=${limit}`)
+    $.get(`/recipe/${ingredient}?gluten=${glutenCheck}&dairy=${dairyCheck}&page=1&limit=${limit}`)
     .then((data) => {
         render(data.results)
+        currentPage = 1
+        size = data.size
     })
+
 })
 
 
@@ -28,22 +32,24 @@ $(".recipe-album-container").on("click", "img", function() {
 })
 
 $("#prev-button").on("click", function() {
-    if (page > 1) {
-        $.get(`/recipe/${ingredient}?gluten=${glutenCheck}&dairy=${dairyCheck}&page=${page}&limit=${limit}`)
+    if (currentPage > 1 && currentPage < size) {
+        $.get(`/recipe/${ingredient}?gluten=${glutenCheck}&dairy=${dairyCheck}&page=${currentPage--}&limit=${limit}`)
         .then((data) => {
             render(data.results)
         })
-        page = page - 1
     }
 })
 
 $("#next-button").on("click", function() {
-    if (page < 1) {
-        $.get(`/recipe/${ingredient}?gluten=${glutenCheck}&dairy=${dairyCheck}&page=${page}&limit=${limit}`)
+    let ingredient = $(this).closest(".container").find()
+    let glutenCheck = $("#gluten:checked").length // 1 - checked 0 unchecked
+    let dairyCheck = $("#dairy:checked").length
+
+    if (currentPage < size) {
+        $.get(`/recipe/${ingredient}?gluten=${glutenCheck}&dairy=${dairyCheck}&page=${currentPage++}&limit=${limit}`)
         .then((data) => {
             render(data.results)
         })
-        page = page + 1
     }
 })
 

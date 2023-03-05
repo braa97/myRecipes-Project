@@ -53,6 +53,8 @@ app.get('/recipe/:ingredient', function(req, res) {
     axios.get(`${INGREDIENT_URL}/${ingredient}`)
     .then((recipes) => {     
         const results = {}
+        let size = Math.ceil(recipes.data.results.length / limit)
+        results.size = size
 
         results.results = recipes.data.results.slice(startIndex, endIndex)
         results.results.map((e) => {    
